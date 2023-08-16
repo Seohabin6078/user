@@ -20,10 +20,10 @@ public class Member extends Auditable {
     @Column(nullable = false, length = 50)
     private String email;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 24)
     private String password;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 10)
     private String displayName;
 
     @Enumerated(value = EnumType.STRING)
