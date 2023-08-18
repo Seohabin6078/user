@@ -6,7 +6,6 @@ import com.user.member.mapper.MemberMapper;
 import com.user.member.service.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,11 +25,7 @@ public class MemberController {
     }
 
     @PostMapping
-    public ResponseEntity<MemberDto.Response> postMember(@RequestBody @Valid MemberDto.Post requestBody, BindingResult bindingResult) {
-        // 요거 테스트 제대로 해보자!!!
-        if (bindingResult.hasErrors()) {
-            throw new RuntimeException();
-        }
+    public ResponseEntity<MemberDto.Response> postMember(@RequestBody @Valid MemberDto.Post requestBody) {
 
         Member member = memberService.createMember(mapper.memberPostDtoToMember(requestBody));
         MemberDto.Response response = mapper.memberToMemberResponseDto(member);

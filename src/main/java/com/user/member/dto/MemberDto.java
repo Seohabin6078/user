@@ -1,7 +1,7 @@
 package com.user.member.dto;
 
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -9,7 +9,7 @@ import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 
 public class MemberDto {
-
+    @Builder
     @Getter
     public static class Post {
         @NotBlank
@@ -27,6 +27,7 @@ public class MemberDto {
         private String displayName;
     }
 
+    @Builder
     @Getter
     public static class Patch {
         private Long memberId;
@@ -44,8 +45,8 @@ public class MemberDto {
         }
     }
 
+    @Builder
     @Getter
-    @Setter
     public static class Response {
         private Long memberId;
         private String email;
