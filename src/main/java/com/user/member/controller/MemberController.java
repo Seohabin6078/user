@@ -4,6 +4,7 @@ import com.user.member.dto.MemberDto;
 import com.user.member.entity.Member;
 import com.user.member.mapper.MemberMapper;
 import com.user.member.service.MemberService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -15,14 +16,10 @@ import javax.validation.constraints.Positive;
 @RestController
 @RequestMapping("/members")
 @Validated
+@RequiredArgsConstructor // final이나 @notnull이 붙은 필드의 생성자를 자동으로 생성해준다.
 public class MemberController {
     private final MemberService memberService;
     private final MemberMapper mapper;
-
-    public MemberController(MemberService memberService, MemberMapper mapper) {
-        this.memberService = memberService;
-        this.mapper = mapper;
-    }
 
     @PostMapping
     public ResponseEntity<MemberDto.Response> postMember(@RequestBody @Valid MemberDto.Post requestBody) {

@@ -2,19 +2,17 @@ package com.user.member.service;
 
 import com.user.member.entity.Member;
 import com.user.member.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class MemberService {
     // todo 이후에 예외처리 더 친철하게 하는 방향으로 변경하기!
     private final MemberRepository memberRepository;
-
-    public MemberService(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
-    }
 
     public Member createMember(Member member) {
         verifyExistsEmail(member.getEmail());
