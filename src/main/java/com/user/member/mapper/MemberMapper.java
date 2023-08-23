@@ -2,13 +2,45 @@ package com.user.member.mapper;
 
 import com.user.member.dto.MemberDto;
 import com.user.member.entity.Member;
-import org.mapstruct.Mapper;
+import org.springframework.stereotype.Component;
 
-@Mapper(componentModel = "spring")
-public interface MemberMapper {
-    Member memberPostDtoToMember(MemberDto.Post post);
+@Component
+public class MemberMapper {
+    public Member memberPostDtoToMember(MemberDto.Post post) {
+        if (post == null) {
+            return null;
+        }
 
-    Member memberPatchDtoToMember(MemberDto.Patch patch);
+        return Member.builder()
+                .email(post.getEmail())
+                .password(post.getPassword())
+                .displayName(post.getDisplayName())
+                .build();
+    }
 
-    MemberDto.Response memberToMemberResponseDto(Member member);
+    public Member memberPatchDtoToMember(MemberDto.Patch patch) {
+        if (patch == null) {
+            return null;
+        }
+
+        return Member.builder()
+                .memberId(patch.getMemberId())
+                .password(patch.getPassword())
+                .displayName(patch.getDisplayName())
+                .build();
+    }
+
+    public MemberDto.Response memberToMemberResponseDto(Member member) {
+        if (member == null) {
+            return null;
+        }
+
+        return MemberDto.Response.builder()
+                .memberId(member.getMemberId())
+                .email(member.getEmail())
+                .displayName(member.getDisplayName())
+                .createdAt(member.getCreatedAt())
+                .modifiedAt(member.getModifiedAt())
+                .build();
+    }
 }

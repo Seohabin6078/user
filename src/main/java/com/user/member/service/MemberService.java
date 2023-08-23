@@ -23,11 +23,11 @@ public class MemberService {
     public Member updateMember(Member member) {
         Member findMember = findMember(member.getMemberId());
         Optional.ofNullable(member.getPassword())
-                .ifPresent(findMember::setPassword);
+                .ifPresent(findMember::changePassword);
         Optional.ofNullable(member.getDisplayName())
-                .ifPresent(findMember::setDisplayName);
+                .ifPresent(findMember::changeDisplayName);
         Optional.ofNullable(member.getMemberStatus())
-                .ifPresent(findMember::setMemberStatus);
+                .ifPresent(findMember::changeMemberStatus);
 
         return memberRepository.save(findMember);
     }
@@ -49,7 +49,7 @@ public class MemberService {
     // soft delete 적용
     public Member deleteMember(Long memberId) {
         Member member = findMember(memberId);
-        member.setMemberStatus(Member.MemberStatus.MEMBER_QUIT);
+        member.changeMemberStatus(Member.MemberStatus.MEMBER_QUIT);
         return memberRepository.save(member);
     }
 
